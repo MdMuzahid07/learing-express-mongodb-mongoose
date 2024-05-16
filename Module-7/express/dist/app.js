@@ -16,8 +16,24 @@ const logger = (req, res, next) => {
 app.get('/', logger, (req, res) => {
     res.send('Hello world!, welcome to Developer World');
 });
-app.post("/", logger, (req, res) => {
-    console.log(req.body);
-    res.send("world is awesome");
+app.post("/", logger, (req, res, next) => {
+    try {
+        console.log(req.body);
+        res.send("world is awesome");
+    }
+    catch (error) {
+        next(error);
+    }
+});
+// custom error handler
+app.all("*", (req, res) => {
+    res.status(400).json({
+        success: false,
+        message: "Not Found"
+    });
+});
+// global error handler
+app.use((error, req, res, next) => {
+    console.log(error);
 });
 exports.default = app;

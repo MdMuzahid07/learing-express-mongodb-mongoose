@@ -20,9 +20,34 @@ app.get('/', logger, (req: Request, res: Response) => {
 });
 
 
-app.post("/", logger, (req: Request, res: Response) => {
-    console.log(req.body);
-    res.send("world is awesome");
-})
+app.post("/", logger, (req: Request, res: Response, next: NextFunction) => {
+    try {
+        console.log(req.body);
+        res.send("world is awesome");
+    } catch (error) {
+        next(error);
+    }
+});
+
+
+// custom error handler
+
+app.all("*", (req: Request, res: Response) => {
+    res.status(400).json({
+        success: false,
+        message: "Not Found"
+    })
+});
+
+
+// global error handler
+
+app.use((error: any, req: Request, res: Response, next: NextFunction) => {
+    console.log(error);
+});
+
+
+
+
 
 export default app;
