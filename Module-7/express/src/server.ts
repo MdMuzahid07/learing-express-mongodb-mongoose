@@ -1,9 +1,7 @@
 import { Server } from "http"
 import app from "./app"
-
-let server: Server;
-
 const PORT = 5000;
+let server: Server;
 
 
 async function bootstrap() {
