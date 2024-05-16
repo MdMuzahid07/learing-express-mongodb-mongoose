@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "scripts": {
+    "start-dev": "nodemon ./dist/server.js",
+    "start": "node ./dist/server.js"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.12",
+    "nodemon": "^3.1.0",
+    "typescript": "^5.4.5"
+  }
+}
