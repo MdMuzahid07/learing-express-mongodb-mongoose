@@ -22,18 +22,18 @@ export interface Student {
   id: string;
   name: Username;
   gender: {
-    type: String,
-    enum: ["male" | "female"],
-    required: true
+    type: String;
+    enum: ["male" | "female"];
+    required: true;
   };
   dateOfBirth?: string;
   email: string;
   contactNumber: string;
   emergencyContactNo: string;
   bloodGroup?: {
-    type: String,
-    enum: ["A+" | "A-" | "O+"],
-    required: true
+    type: String;
+    enum: ["A+" | "A-" | "O+"];
+    required: true;
   };
   presentAddress: string;
   permanentAddress: string;
