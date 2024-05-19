@@ -21,12 +21,20 @@ export interface LocalGuardian {
 export interface Student {
   id: string;
   name: Username;
-  gender: "male" | "female";
+  gender: {
+    type: String,
+    enum: ["male" | "female"],
+    required: true
+  };
   dateOfBirth?: string;
   email: string;
   contactNumber: string;
   emergencyContactNo: string;
-  bloodGroup?: "A+" | "A-" | "O+";
+  bloodGroup?: {
+    type: String,
+    enum: ["A+" | "A-" | "O+"],
+    required: true
+  };
   presentAddress: string;
   permanentAddress: string;
   guardian: Guardian;
