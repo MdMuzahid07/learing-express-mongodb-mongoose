@@ -6,25 +6,35 @@ import {
   Username,
 } from "./student.interface";
 
+import validator from 'validator';
+
 const UserNameSchema = new Schema<Username>({
   firstName: {
     type: String,
     required: true,
     maxlength: [20, "Name cannot be more than 20 character"],
     trim: true,
+    // validate using third party library
+    validate: {
+      validator: (value: string) => validator.isAlpha(value),
+      message: "{VALUE} is not valid"
+    }
+
+
     // custom validator
     // validate: function (value) {
     //   const firstName = value.charAt(0).toUpperCase() + value.slice(1);
     //   return firstName === value;
     // }
     // with custom error message
-    validate: {
-      validator: function (value: string) {
-        const firstName = value.charAt(0).toUpperCase() + value.slice(1);
-        return firstName === value;
-      },
-      message: "{VALUE}, Name must be start with capital letter, and rest letters in small"
-    }
+    // validate: {
+    //   validator: function (value: string) {
+    //     const firstName = value.charAt(0).toUpperCase() + value.slice(1);
+    //     return firstName === value;
+    //   },
+    //   message: "{VALUE}, Name must be start with capital letter, and rest letters in small"
+    // }
+
   },
   middleName: {
     type: String,
@@ -90,7 +100,11 @@ const StudentSchema = new Schema<Student>({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    validate: {
+      validator: (value: string) => validator.isEmail(value),
+      message: "{VALUE} is not a valid email"
+    }
   },
   bloodGroup: ["A+", "A-", "O+"],
   contactNumber: {
