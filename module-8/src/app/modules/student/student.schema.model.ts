@@ -72,7 +72,11 @@ const StudentSchema = new Schema<Student>({
     type: UserNameSchema,
     required: true,
   },
-  gender: ["male", "female"],
+  gender: {
+    type: String,
+    enum: ["male", "female", "others"],
+    required: true
+  },
   dateOfBirth: {
     type: String,
   },
@@ -85,7 +89,11 @@ const StudentSchema = new Schema<Student>({
       message: "{VALUE} is not a valid email",
     },
   },
-  bloodGroup: ["A+", "A-", "O+"],
+  bloodGroup: {
+    type: String,
+    enum: ["A+", "A-", "O+"],
+    required: true
+  },
   contactNumber: {
     type: String,
     required: true,

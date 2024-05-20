@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { StudentServices } from "./student.service";
-import StudentValidationSchema from "./student.validation";
+import { z } from "zod";
+import studentValidationSchema from "./student.validator";
 
 const getStudents = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -19,19 +20,13 @@ const postStudent = async (req: Request, res: Response, next: NextFunction) => {
 
     const student = req.body.student;
 
-    const { error, value } = StudentValidationSchema.validate(student);
+    // const { error, value } = StudentValidationSchema.validate(student);
 
-    if (error) {
-      res.status(500).json({
-        success: true,
-        message: "data not created",
-        error: error,
-      });
-    }
+    // validation using zod 
+    const zodParsedData = studentValidationSchema.parse(student);
 
-    console.log({ error }, { value });
 
-    const result = await StudentServices.createStudentToDB(value);
+    const result = await StudentServices.createStudentToDB(zodParsedData);
 
     res.status(200).json({
       success: true,

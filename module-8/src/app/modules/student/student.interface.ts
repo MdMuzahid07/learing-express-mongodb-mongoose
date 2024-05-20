@@ -7,7 +7,7 @@ export interface Guardian {
 
 export interface Username {
   firstName: string;
-  middleName: string;
+  middleName?: string;
   lastName: string;
 }
 
@@ -19,22 +19,15 @@ export interface LocalGuardian {
 }
 
 export interface Student {
-  id: string;
+  id?: string;
   name: Username;
-  gender: {
-    type: String;
-    enum: ["male" | "female"];
-    required: true;
-  };
+  gender:
+  "male" | "female" | "others"
   dateOfBirth?: string;
   email: string;
   contactNumber: string;
   emergencyContactNo: string;
-  bloodGroup?: {
-    type: String;
-    enum: ["A+" | "A-" | "O+"];
-    required: true;
-  };
+  bloodGroup?: "A+" | "A-" | "O+";
   presentAddress: string;
   permanentAddress: string;
   guardian: Guardian;
