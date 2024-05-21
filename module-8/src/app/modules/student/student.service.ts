@@ -1,8 +1,15 @@
-import { Student } from "./student.interface";
+import { TStudent } from "./student.interface";
 import StudentModel from "./student.schema.model";
 
-const createStudentToDB = async (student: Student) => {
-  const res = await StudentModel.create(student);
+const createStudentToDB = async (student: TStudent) => {
+  // builtin static method
+  // const res = await StudentModel.create(student);
+
+  // creating an instance method and using an built in instance method by mongoose
+  const data = new StudentModel(student);
+  const res = data.save();
+
+
   return res;
 };
 
